@@ -1,0 +1,86 @@
+<%- include('header') %>
+<h1 class="mt-4" style="position: relative;left: 300px; width:60%"><%=blog.title%></h1>
+<h4 class="mt-4" style="position: relative;left: 300px; width:60%"><%=blog.subTitle%> </h3>
+
+
+<div style="position: relative;left: 300px; width:60%">
+
+    <div id="carouselExampleFade" class="carousel slide carousel-fade carousel-dark">
+        <div class="carousel-inner">
+          <% blog.blogImages.forEach(elt => { %>
+            <div class="carousel-item active">
+              <img src="<%=elt%>"" class="d-block w-100" alt="...">
+            </div>
+          <%})%>         
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+</div>
+<div class="mt-4" style="position: relative;left: 300px; width:60%">
+    <p>
+      <%=blog.content%>
+    </p>
+    
+    <a href="/like/<%= blog._id %>" id="toggleButton" class="btn btn-primary mb-1 mt-3" ><h6 id="toggleText" class="mb-0 mt-0 ms-1">Like</h6></a>
+    <h6><%=blog.likes.length%> Likes</h6>
+    <div class="mb-3">
+      <form action="/comment/<%=blog._id%>" method="POST">
+        <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
+        <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <button type="submit" class="btn btn-danger mb-3">Comment</button>
+      </form>
+        
+        <% blog.comments.forEach(elt => { %>
+          <div class="card text-bg-light mb-3" style="width: 51rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%=elt.postedBy%></h5>
+              <p class="card-text"><%=elt.text;%></p>
+            </div>
+          </div>
+        <%})%> 
+      
+
+    </div>
+
+
+</div>
+
+<script>
+  const toggleButton = document.getElementById("toggleButton");
+  const toggleText = document.getElementById("toggleText");
+
+  function setInitialState() {
+    const isLiked = localStorage.getItem("isLiked");
+    
+    if (isLiked === "true") {
+      toggleText.textContent = "Unlike";
+    } else {
+      toggleText.textContent = "Like";
+    }
+  }
+
+  toggleButton.addEventListener("click", function() {
+    const isLiked = toggleText.textContent === "Like";
+    
+    if (isLiked) {
+      toggleText.textContent = "Unlike";
+    } else {
+      toggleText.textContent = "Like";
+    }
+    
+    localStorage.setItem("isLiked", isLiked);
+  });
+
+  setInitialState();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>

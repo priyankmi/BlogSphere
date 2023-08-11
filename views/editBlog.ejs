@@ -1,0 +1,32 @@
+<%- include('header') %>
+<form action="/editBlog/<%= blog._id %>" method="POST" enctype="multipart/form-data">
+  <div class="ms-2" style="width:50%">
+    <div class="mb-3 mt-3">
+      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      <input type="text" class="form-control"  placeholder="Title" name="title" value="<%=blog.title %>">
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="exampleFormControlInput1" class="form-label">Subtitle</label>
+      <input type="text" class="form-control"  placeholder="Subtitle" name="subTitle" value="<%=blog.subTitle %>">
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="exampleFormControlInput1" class="form-label" >Category</label>
+      <input type="text" class="form-control"  placeholder="Category" name="category" value="<%=blog.category %>">
+    </div>
+
+    <div class="mb-3">
+      <label for="formFileMultiple" class="form-label" >Upload Images</label>
+      <input class="form-control" type="file"  name="blogImages" multiple>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+      <textarea class="form-control"  rows="3" name="content" value="<%=blog.content %>"></textarea>
+    </div>
+    <button type="submit" class="btn btn-dark">Publish</button>
+
+
+    </div>
+</form>
+      
+</body>
+</html>
