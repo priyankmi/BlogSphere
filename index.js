@@ -22,7 +22,7 @@ app.set('views', __dirname + '/views');
 app.use(express.static('public'));
 
 const User = require('./models/user');
-const Blog = require('./models/blogs'); // Update the path to the user model file
+const Blog = require('./models/blogs');
 
 app.use(
   session({
